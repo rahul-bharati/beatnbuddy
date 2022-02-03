@@ -3,8 +3,8 @@ import type { NextComponentType } from "next";
 const Header: NextComponentType = () => {
   return (
     <>
-      <div className="w-full min-h-[550px] relative overflow-hidden">
-        <div className="w-full h-full absolute t-0 l-0 -z-10">
+      <div className="w-full min-h-[600px] relative overflow-hidden">
+        <div className="w-full h-full absolute t-0 l-0 -z-10 bg-black">
           <video
             className="w-full h-full object-cover object-center"
             autoPlay
@@ -14,7 +14,7 @@ const Header: NextComponentType = () => {
             <source src="/videos/beatnbuddy.mp4" />
           </video>
         </div>
-        <div className="flex flex-col h-[550px] justify-center items-center bg-gray-900/[.5] px-3 py-5">
+        <div className="flex flex-col h-[600px] justify-center items-center bg-gray-900/[.5] px-3 py-5">
           <h1 className="text-white font-semibold text-4xl tracking-wide text-center">
             Connect on Beat&amp;Buddy
           </h1>
