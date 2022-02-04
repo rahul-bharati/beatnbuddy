@@ -1,15 +1,4 @@
-# Basic Sample Hardhat Project
+# Beat&Buddy (built for Roadtoweb3 hackathon)
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+This Project is built on top of polygon blockchain to allow creators to upload their music and make it available for other users to listen to. The uploaded music is stored on ipfs storage and then minted to NFTs allowing it to be owned by the creator itself.
+I've built it using next.js for front-end and hardhat for smart-contract development.
