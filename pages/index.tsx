@@ -10,7 +10,6 @@ import TrendingContainer from "../components/TrendingContainer";
 const Home: NextPage = () => {
   return (
     <>
-      <Navbar />
       <Header />
       <SearchBar />
       <TrendingContainer />

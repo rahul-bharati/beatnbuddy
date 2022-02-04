@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Navbar: NextComponentType = () => {
   return (
-    <nav className="bg-transparent py-4 px-4 fixed top-0 left-0 w-full z-10">
+    <nav className="bg-black py-4 px-4 fixed top-0 left-0 w-full z-10">
       <div className="max-w-[1200px] w-100 mx-auto flex items-center justify-between">
         <Link href="/" passHref>
           <h3 className="text-xl font-bold tracking-wide text-white">
