@@ -50,6 +50,8 @@ contract BeatnBuddy is ReentrancyGuard {
             payable(msg.sender)
         );
 
+        IERC721(soundContract).transferFrom(msg.sender, address(this), tokenId);
+
         emit SoundCreated(soundId, soundContract, tokenId, msg.sender);
     }
 
@@ -84,20 +86,18 @@ contract BeatnBuddy is ReentrancyGuard {
         returns (BeatnBuddySound[] memory)
     {
         uint256 totalCount = _soundIds.current();
-        uint256 itemsToReturn = _soundIds.current();
-        if (limit == true) {
-            itemsToReturn = 8;
-        }
-        BeatnBuddySound[] memory sounds = new BeatnBuddySound[](itemsToReturn);
-        uint256 lastItemCount = totalCount - itemsToReturn;
+        BeatnBuddySound[] memory sounds = new BeatnBuddySound[](totalCount);
         uint256 currentCount = 0;
-        for (uint256 count = lastItemCount; count < totalCount; count++) {
+        for (uint256 count = 0; count < totalCount; count++) {
             BeatnBuddySound storage currentSound = idToBeatnBuddySound[
                 count + 1
             ];
             currentCount += 1;
             sounds[currentCount] = currentSound;
-            currentCount += 1;
+            count += 1;
+            if (limit == true && count >= 8) {
+                break;
+            }
         }
 
         return sounds;
