@@ -3,19 +3,22 @@ import { ChangeEvent, useContext, useEffect, useState } from "react";
 
 import { AppContext } from "../context/AppContext";
 
-import { sound, beatnbuddy } from "../config";
-
-import SoundNFTContract from "../artifacts/contracts/Sound.sol/Sound.json";
-import BeatnBuddyContract from "../artifacts/contracts/BeatnBuddy.sol/BeatnBuddy.json";
 import Loading from "../components/Loading";
 import { Filelike } from "web3.storage";
 import { jsonFile, makeGatewayURL } from "../utils/storage";
+import { sound } from "../config";
 
 const filePrefix = "BeatnBuddy";
 
 const Create: NextPage = () => {
-  const { currentAccount, storageClient, walletConnected, connectWallet } =
-    useContext(AppContext);
+  const {
+    currentAccount,
+    storageClient,
+    walletConnected,
+    connectWallet,
+    getSoundNFTContract,
+    getBeatnBuddyContract,
+  } = useContext(AppContext);
   const [title, setTitle] = useState("");
   const [file, setFile] = useState<File>();
   const [loading, setLoading] = useState(false);
@@ -68,10 +71,28 @@ const Create: NextPage = () => {
         soundURI,
         metadataURI,
       });
+      const soundContract = getSoundNFTContract();
+      const beatnbuddyContract = getBeatnBuddyContract();
+
+      const soundTransaction = await soundContract.createToken(
+        metadataGatewayURL
+      );
+      const soundTxn = await soundTransaction.wait();
+      const soundEvent = soundTxn.events[0];
+      const soundValue = soundEvent.args[2];
+      const soundTokenId = soundValue.toNumber();
+
+      const beatnbuddyTransaction = await beatnbuddyContract.createSoundItem(
+        sound,
+        soundTokenId
+      );
+      await beatnbuddyTransaction.wait();
+
       setTitle("");
       setLoading(false);
       setPercent(0);
       alert("NFT generated");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }

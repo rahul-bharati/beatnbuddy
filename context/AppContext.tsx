@@ -2,12 +2,19 @@ import { createContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { Web3StorageToken } from "./../utils/tokensUtil";
 import { Web3Storage } from "web3.storage";
+
+import { sound, beatnbuddy } from "../config";
+
+import SoundNFTContract from "../artifacts/contracts/Sound.sol/Sound.json";
+import BeatnBuddyContract from "../artifacts/contracts/BeatnBuddy.sol/BeatnBuddy.json";
 interface IAppContext {
   walletConnected: boolean;
   currentAccount: string;
   connectWallet: Function;
   storageClient: Web3Storage | null;
   isStorageClientValid: Function;
+  getSoundNFTContract: Function;
+  getBeatnBuddyContract: Function;
 }
 
 export const AppContext = createContext<IAppContext>({
@@ -16,6 +23,8 @@ export const AppContext = createContext<IAppContext>({
   connectWallet: () => {},
   storageClient: null,
   isStorageClientValid: () => {},
+  getSoundNFTContract: () => {},
+  getBeatnBuddyContract: () => {},
 });
 
 declare global {
@@ -99,6 +108,24 @@ export const AppContextProvider = ({ children }: Props) => {
     }
   };
 
+  const getSoundNFTContract = () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(sound, SoundNFTContract.abi, signer);
+    return contract;
+  };
+
+  const getBeatnBuddyContract = () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      beatnbuddy,
+      BeatnBuddyContract.abi,
+      signer
+    );
+    return contract;
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -107,6 +134,8 @@ export const AppContextProvider = ({ children }: Props) => {
         connectWallet,
         storageClient,
         isStorageClientValid,
+        getSoundNFTContract,
+        getBeatnBuddyContract,
       }}
     >
       {children}
