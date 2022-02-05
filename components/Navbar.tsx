@@ -12,9 +12,9 @@ const Navbar: NextComponentType = () => {
     <nav className="bg-black py-4 px-4 fixed top-0 left-0 w-full z-10">
       <div className="max-w-[1200px] w-100 mx-auto flex items-center justify-between">
         <Link href="/" passHref>
-          <h3 className="text-xl font-bold tracking-wide text-white">
+          <a className="text-xl font-bold tracking-wide text-white">
             BEAT&amp;BUDDY
-          </h3>
+          </a>
         </Link>
         <ul className="list-none flex items-center">
           {!walletConnected ? (
@@ -39,7 +39,7 @@ const Navbar: NextComponentType = () => {
           ) : (
             <li className="md:text-lg mr-4">
               <span className="text-white">
-                Welcome, {shortenAddress(currentAccount)}
+                {shortenAddress(currentAccount)}
               </span>
             </li>
           )}

@@ -1,16 +1,21 @@
 import { createContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
-
+import { Web3StorageToken } from "./../utils/tokensUtil";
+import { Web3Storage } from "web3.storage";
 interface IAppContext {
   walletConnected: boolean;
   currentAccount: string;
   connectWallet: Function;
+  storageClient: Web3Storage | null;
+  isStorageClientValid: Function;
 }
 
 export const AppContext = createContext<IAppContext>({
   walletConnected: false,
   currentAccount: "",
   connectWallet: () => {},
+  storageClient: null,
+  isStorageClientValid: () => {},
 });
 
 declare global {
@@ -26,6 +31,7 @@ interface Props {
 export const AppContextProvider = ({ children }: Props) => {
   const [walletConnected, setWalletConnected] = useState(false);
   const [currentAccount, setCurrentAccount] = useState("");
+  const storageClient = new Web3Storage({ token: Web3StorageToken });
 
   const checkIfWalletIsConnected = async () => {
     const { ethereum } = window;
@@ -77,9 +83,31 @@ export const AppContextProvider = ({ children }: Props) => {
     isWalletConnected();
   }, []);
 
+  const isStorageClientValid = async () => {
+    try {
+      for await (const _ of storageClient.list({ maxResults: 1 })) {
+        // any non-error response means the token is legit
+        break;
+      }
+      return true;
+    } catch (error: any) {
+      // only return false for auth-related errors
+      if (error.message.includes("401") || error.message.includes("403")) {
+        console.log("invalid token", error.message);
+        return false;
+      }
+    }
+  };
+
   return (
     <AppContext.Provider
-      value={{ walletConnected, currentAccount, connectWallet }}
+      value={{
+        walletConnected,
+        currentAccount,
+        connectWallet,
+        storageClient,
+        isStorageClientValid,
+      }}
     >
       {children}
     </AppContext.Provider>

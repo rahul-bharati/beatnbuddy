@@ -2,6 +2,7 @@ import "../styles/globals.scss";
 import type { AppProps } from "next/app";
 import Navbar from "../components/Navbar";
 import { AppContextProvider } from "../context/AppContext";
+import Footer from "../components/Footer";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -9,6 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <>
         <Navbar />
         <Component {...pageProps} />
+        <Footer />
       </>
     </AppContextProvider>
   );
