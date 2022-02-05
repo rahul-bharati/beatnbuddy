@@ -35,7 +35,7 @@ const CreatorsSection: NextComponentType = () => {
             Join Now
           </button>
         ) : (
-          <Link href="#" passHref>
+          <Link href="/create" passHref>
             <a className="btn px-10 py-3 bg-green-600 text-white mt-5 rounded-full shadow-lg text-xl mt-12">
               Create
             </a>

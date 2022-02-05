@@ -34,7 +34,7 @@ const Header: NextComponentType = () => {
             className="btn px-10 py-3 bg-green-600 text-white mt-5 rounded-full shadow-lg text-xl mt-12"
             onClick={handleClick}
           >
-            {walletConnected ? "Explore" : "Get Started"}
+            {walletConnected ? "Listen now" : "Get Started"}
           </button>
         </div>
       </div>
