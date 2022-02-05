@@ -1,13 +1,16 @@
 import "../styles/globals.scss";
 import type { AppProps } from "next/app";
 import Navbar from "../components/Navbar";
+import { AppContextProvider } from "../context/AppContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <Navbar />
-      <Component {...pageProps} />
-    </>
+    <AppContextProvider>
+      <>
+        <Navbar />
+        <Component {...pageProps} />
+      </>
+    </AppContextProvider>
   );
 }
 

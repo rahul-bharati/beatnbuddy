@@ -2,8 +2,18 @@ import type { NextComponentType } from "next";
 import Image from "next/image";
 
 import CreatorImage from "../images/creator.jpg";
+import { useContext } from "react";
+import { AppContext } from "./../context/AppContext";
+import Link from "next/link";
 
 const CreatorsSection: NextComponentType = () => {
+  const { walletConnected, connectWallet } = useContext(AppContext);
+  const handleJoinBtnClick = () => {
+    if (!walletConnected) {
+      connectWallet();
+    }
+  };
+
   return (
     <div className="flex items-center gap-10 bg-black mt-40 py-10 relative">
       <div className="w-1/2 min-w-[600px]">
@@ -17,9 +27,20 @@ const CreatorsSection: NextComponentType = () => {
           Connect with your fans, share your sound and grow your audience and
           earn in cryptos. What are you waiting for?
         </p>
-        <button className="btn px-10 py-3 bg-green-600 text-white mt-5 rounded-full shadow-lg text-xl mt-12">
-          Join Now
-        </button>
+        {!walletConnected ? (
+          <button
+            className="btn px-10 py-3 bg-green-600 text-white mt-5 rounded-full shadow-lg text-xl mt-12"
+            onClick={handleJoinBtnClick}
+          >
+            Join Now
+          </button>
+        ) : (
+          <Link href="#" passHref>
+            <a className="btn px-10 py-3 bg-green-600 text-white mt-5 rounded-full shadow-lg text-xl mt-12">
+              Create
+            </a>
+          </Link>
+        )}
       </div>
     </div>
   );

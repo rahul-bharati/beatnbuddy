@@ -1,6 +1,14 @@
 import type { NextComponentType } from "next";
+import { useContext } from "react";
+import { AppContext } from "./../context/AppContext";
 
 const Header: NextComponentType = () => {
+  const { walletConnected, connectWallet } = useContext(AppContext);
+  const handleClick = () => {
+    if (!walletConnected) {
+      connectWallet();
+    }
+  };
   return (
     <>
       <div className="w-full min-h-[600px] relative overflow-hidden">
@@ -22,8 +30,11 @@ const Header: NextComponentType = () => {
             Built on top of blockchain to provide a place to discover, stream
             and share a constantly expanding mix of music.
           </p>
-          <button className="btn px-10 py-3 bg-green-600 text-white mt-5 rounded-full shadow-lg text-xl mt-12">
-            Get Started
+          <button
+            className="btn px-10 py-3 bg-green-600 text-white mt-5 rounded-full shadow-lg text-xl mt-12"
+            onClick={handleClick}
+          >
+            {walletConnected ? "Explore" : "Get Started"}
           </button>
         </div>
       </div>
