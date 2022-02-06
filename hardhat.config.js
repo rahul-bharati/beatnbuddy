@@ -23,10 +23,10 @@ module.exports = {
     hardhat: {
       chainId: 1337,
     },
-    // ropsten: {
-    //   url: process.env.ALCHEMY_HTTP,
-    //   accounts: [process.env.ACCOUNT],
-    // },
+    mumbai: {
+      url: process.env.ALCHEMY_HTTP,
+      accounts: [process.env.ACCOUNT],
+    },
   },
   solidity: {
     version: "0.8.4",

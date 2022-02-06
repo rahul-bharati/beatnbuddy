@@ -1,2 +1,2 @@
-export const beatnbuddy = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
-export const sound = "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318";
+export const beatnbuddy = "0x189946453eF5f267c190CeB5F89d3C60aa91c415";
+export const sound = "0x9Fd031BB3f6474a72D66ad0691CF1B524c0f3f0E";
