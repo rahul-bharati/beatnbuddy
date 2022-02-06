@@ -80,24 +80,22 @@ contract BeatnBuddy is ReentrancyGuard {
         return sounds;
     }
 
-    function getSounds(bool limit)
-        public
-        view
-        returns (BeatnBuddySound[] memory)
-    {
+    function getSounds() public view returns (BeatnBuddySound[] memory) {
         uint256 totalCount = _soundIds.current();
-        BeatnBuddySound[] memory sounds = new BeatnBuddySound[](totalCount);
-        uint256 currentCount = 0;
+        uint256 soundCount = 0;
+        uint256 currentIndex = 0;
         for (uint256 count = 0; count < totalCount; count++) {
+            soundCount += 1;
+        }
+
+        BeatnBuddySound[] memory sounds = new BeatnBuddySound[](soundCount);
+        for (uint256 count = 0; count < totalCount; count++) {
+            uint256 currentSoundId = count + 1;
             BeatnBuddySound storage currentSound = idToBeatnBuddySound[
-                count + 1
+                currentSoundId
             ];
-            currentCount += 1;
-            sounds[currentCount] = currentSound;
-            count += 1;
-            if (limit == true && count >= 8) {
-                break;
-            }
+            sounds[currentIndex] = currentSound;
+            currentIndex += 1;
         }
 
         return sounds;
