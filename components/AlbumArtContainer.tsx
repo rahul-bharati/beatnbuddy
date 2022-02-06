@@ -1,6 +1,7 @@
 import { AiFillPlayCircle } from "react-icons/ai";
 import { useContext } from "react";
 import { AppContext } from "./../context/AppContext";
+import { shortenAddress } from "./../utils/shortenAddress";
 interface Props {
   data: {
     tokenId: string;
@@ -24,8 +25,13 @@ const AlbumArtContainer = ({ data }: Props) => {
     >
       <AiFillPlayCircle className="text-5xl text-gray-900 mr-5" />
       <div className="details-container flex flex-col">
-        <p className="text-gray-900 text-2xl font-bold">{data.title}</p>
-        <p className="text-gray-500">{data.owner}</p>
+        <p className="text-gray-900 text-lg md:text-2xl font-bold">
+          {data.title}
+        </p>
+        <p className="text-gray-500 text-sm md:hidden">
+          {shortenAddress(data.owner)}
+        </p>
+        <p className="text-gray-500 hidden md:block">{data.owner}</p>
       </div>
     </div>
   );

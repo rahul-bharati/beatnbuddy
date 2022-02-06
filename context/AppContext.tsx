@@ -65,8 +65,6 @@ export const AppContextProvider = ({ children }: Props) => {
     tokenId: null,
   });
 
-  console.log({ Web3StorageToken });
-
   const storageClient = new Web3Storage({ token: Web3StorageToken });
 
   const checkIfWalletIsConnected = async () => {

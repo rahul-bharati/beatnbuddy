@@ -46,7 +46,11 @@ const Create: NextPage = () => {
     setLoading(true);
 
     try {
-      const uploadname = [filePrefix, title.split(" ").join("-")].join("-");
+      const uploadname = [
+        filePrefix,
+        title.split(" ").join("-"),
+        new Date().getTime(),
+      ].join("-");
       const metadata = { file: file?.name, title, owner: currentAccount };
       const metadataFile = jsonFile("metadata.json", metadata);
       const fileSize = file?.size || 0;

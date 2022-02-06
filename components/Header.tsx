@@ -30,12 +30,14 @@ const Header: NextComponentType = () => {
             Built on top of blockchain to provide a place to discover, stream
             and share a constantly expanding mix of music.
           </p>
-          <button
-            className="btn px-10 py-3 bg-green-600 text-white mt-5 rounded-full shadow-lg text-xl mt-12"
-            onClick={handleClick}
-          >
-            {walletConnected ? "Listen now" : "Get Started"}
-          </button>
+          {!walletConnected && (
+            <button
+              className="btn px-10 py-3 bg-green-600 text-white mt-5 rounded-full shadow-lg text-xl mt-12"
+              onClick={handleClick}
+            >
+              Get Started
+            </button>
+          )}
         </div>
       </div>
     </>

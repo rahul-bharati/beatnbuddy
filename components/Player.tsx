@@ -92,11 +92,11 @@ const Player: NextComponentType = () => {
         }}
         autoPlay
       />
-      <div className="container max-w-[1200px] mx-auto flex items-center">
-        <div className="flex items-center">
+      <div className="container max-w-[1200px] w-full mx-auto flex items-center flex-col sm:flex-row">
+        <div className="flex items-center sm:min-w-[200px] mb-3 sm:mb-0 border-b-2 sm:border-b-0">
           <BsFillFileMusicFill className="text-3xl text-gray-100 mr-5" />
           <div className="details-container flex flex-col">
-            <p className="text-gray-100 text-xl font-bold">
+            <p className="text-gray-100 text-md font-bold">
               {playerData.title}
             </p>
             <p className="text-gray-300 text-sm">
@@ -114,7 +114,7 @@ const Player: NextComponentType = () => {
               )}
             </button>
           </div>
-          <div className="flex items-center max-w-[600px] w-full justify-center">
+          <div className="flex items-center max-w-[300px] lg:max-w-[600px] w-full justify-center">
             <input
               type="range"
               name="timeline"
@@ -122,7 +122,7 @@ const Player: NextComponentType = () => {
               max={100}
               value={timeline}
               step={1}
-              className="w-full mt-2"
+              className="w-full block mt-2"
               readOnly
               onChange={(e) => {
                 setTimeline(parseInt(e.target.value));
