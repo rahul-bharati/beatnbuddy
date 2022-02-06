@@ -11,7 +11,7 @@ interface itemStateProps {
   soundUri: any;
 }
 
-const TrendingContainer: NextComponentType = () => {
+const MySoundsContainer: NextComponentType = () => {
   const {
     getSoundNFTContract,
     getBeatnBuddyContract,
@@ -27,7 +27,7 @@ const TrendingContainer: NextComponentType = () => {
     }
     const soundContract = getSoundNFTContract();
     const beatnBuddyContract = getBeatnBuddyContract();
-    const data: [] = await beatnBuddyContract.getSounds();
+    const data: [] = await beatnBuddyContract.getMySounds();
     console.log(data);
 
     const items: itemStateProps[] = await Promise.all(
@@ -44,8 +44,6 @@ const TrendingContainer: NextComponentType = () => {
         return item;
       })
     );
-    console.log(items);
-
     setItem(items);
   };
 
@@ -54,9 +52,9 @@ const TrendingContainer: NextComponentType = () => {
   }, []);
 
   return (
-    <div className="px-4 max-w-[1200px] mx-auto">
+    <div className="px-4 max-w-[1200px] mx-auto mt-12 py-10">
       <h2 className="text-2xl text-gray-900 text-center font-bold">
-        Hear what&apos;s trending today
+        Hear are your uploads
       </h2>
       <div className="relative overflow-auto">
         <ListGrid data_array={items} />
@@ -65,4 +63,4 @@ const TrendingContainer: NextComponentType = () => {
   );
 };
 
-export default TrendingContainer;
+export default MySoundsContainer;

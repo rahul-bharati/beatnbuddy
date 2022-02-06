@@ -7,25 +7,6 @@ import { sound, beatnbuddy } from "../config";
 
 import SoundNFTContract from "../artifacts/contracts/Sound.sol/Sound.json";
 import BeatnBuddyContract from "../artifacts/contracts/BeatnBuddy.sol/BeatnBuddy.json";
-interface IAppContext {
-  walletConnected: boolean;
-  currentAccount: string;
-  connectWallet: Function;
-  storageClient: Web3Storage | null;
-  isStorageClientValid: Function;
-  getSoundNFTContract: Function;
-  getBeatnBuddyContract: Function;
-}
-
-export const AppContext = createContext<IAppContext>({
-  walletConnected: false,
-  currentAccount: "",
-  connectWallet: () => {},
-  storageClient: null,
-  isStorageClientValid: () => {},
-  getSoundNFTContract: () => {},
-  getBeatnBuddyContract: () => {},
-});
 
 declare global {
   interface Window {
@@ -37,9 +18,53 @@ interface Props {
   children: JSX.Element;
 }
 
+interface PlayerState {
+  soundUri: string;
+  title: string;
+  owner: string;
+  tokenId: number | null;
+}
+
+interface IAppContext {
+  walletConnected: boolean;
+  currentAccount: string;
+  connectWallet: Function;
+  storageClient: Web3Storage | null;
+  isStorageClientValid: Function;
+  getSoundNFTContract: Function;
+  getBeatnBuddyContract: Function;
+  playerData: PlayerState;
+  setPlayerData: Function;
+}
+
+export const AppContext = createContext<IAppContext>({
+  walletConnected: false,
+  currentAccount: "",
+  connectWallet: () => {},
+  storageClient: null,
+  isStorageClientValid: () => {},
+  getSoundNFTContract: () => {},
+  getBeatnBuddyContract: () => {},
+  playerData: {
+    soundUri: "",
+    title: "",
+    owner: "",
+    tokenId: null,
+  },
+  setPlayerData: () => {},
+});
+
 export const AppContextProvider = ({ children }: Props) => {
   const [walletConnected, setWalletConnected] = useState(false);
   const [currentAccount, setCurrentAccount] = useState("");
+
+  const [playerData, setPlayerData] = useState<PlayerState>({
+    owner: "",
+    soundUri: "",
+    title: "",
+    tokenId: null,
+  });
+
   const storageClient = new Web3Storage({ token: Web3StorageToken });
 
   const checkIfWalletIsConnected = async () => {
@@ -136,6 +161,8 @@ export const AppContextProvider = ({ children }: Props) => {
         isStorageClientValid,
         getSoundNFTContract,
         getBeatnBuddyContract,
+        playerData,
+        setPlayerData,
       }}
     >
       {children}

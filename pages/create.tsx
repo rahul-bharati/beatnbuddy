@@ -7,6 +7,7 @@ import Loading from "../components/Loading";
 import { Filelike } from "web3.storage";
 import { jsonFile, makeGatewayURL } from "../utils/storage";
 import { sound } from "../config";
+import MySoundsContainer from "../components/MySoundsContainer";
 
 const filePrefix = "BeatnBuddy";
 
@@ -109,7 +110,7 @@ const Create: NextPage = () => {
         <p className="text-md text-gray-500 text-center">
           Please provide information about your music
         </p>
-        <div className="container mt-8 px-3 max-w-[600px] mx-auto">
+        <div className="container my-8 px-3 max-w-[600px] mx-auto">
           <div className="py-3">
             <label htmlFor="asset" className="text-gray-900 text-sm">
               Music file:
@@ -162,6 +163,7 @@ const Create: NextPage = () => {
             </button>
           </div>
         </div>
+        <MySoundsContainer />
       </div>
     </>
   );

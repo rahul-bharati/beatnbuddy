@@ -17,4 +17,60 @@ h6 {
 
 body {
   padding-top: 60px;
+  padding-bottom: 70px;
 }
+
+input[type="range"] {
+  background: linear-gradient(
+    to right,
+    #7e7e7e 0%,
+    #7e7e7e 50%,
+    #3d3d3d 50%,
+    #3d3d3d 100%
+  );
+  border: none;
+  border-radius: 8px;
+  height: 5px;
+  outline: none;
+  transition: background 450ms ease-in;
+  -webkit-appearance: none;
+}
+
+// /***** Track Styles *****/
+// /***** Chrome, Safari, Opera, and Edge Chromium *****/
+// input[type="range"]::-webkit-slider-runnable-track {
+//   background: #3d3d3d;
+//   height: 5px;
+// }
+
+// /******** Firefox ********/
+// input[type="range"]::-moz-range-track {
+//   background: #3d3d3d;
+//   height: 5px;
+// }
+
+/***** Thumb Styles *****/
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  // margin-top: -12px; /* Centers thumb on the track */
+  background-color: #7e7e7e;
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+}
+
+/***** Thumb Styles *****/
+/***** Firefox *****/
+input[type="range"]::-moz-range-thumb {
+  border: none; /*Removes extra border that FF applies*/
+  background-color: #7e7e7e;
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+}
+
+// input[type="range"]::-moz-range-progress {
+//   background: dodgerblue;
+// }
